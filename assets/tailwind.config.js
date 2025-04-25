@@ -13,7 +13,15 @@ module.exports = {
   ],
   theme: {
     extend: {
+      height:{
+        header: "var(--headerH)"
+      },
       colors: {
+        accent: "hsl(var(--accent) / <alpha-value>)",
+        bg: "hsl(var(--bg) / <alpha-value>)",
+        "bg-ui": "hsl(var(--bgUi) / <alpha-value>)",
+        text: "hsl(var(--text) / <alpha-value>)",
+        "text-ui": "hsl(var(--textUi) / <alpha-value>)",
         brand: "#FD4F00",
       }
     },

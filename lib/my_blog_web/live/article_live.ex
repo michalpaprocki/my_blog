@@ -10,7 +10,7 @@ defmodule MyBlogWeb.ArticleLive do
 
   def render(assigns) do
     ~H"""
-      <article id="article" phx-hook="HandleCopy" class="prose prose-h1:text-sky-700">
+      <article id="article" phx-hook="HandleCopy" class="prose prose-h1:text-accent prose-h2:text-accent/80 prose-h3:text-accent/70 text-text">
         <%= Phoenix.HTML.raw(Earmark.as_html!(@article)) %>
       </article>
     """

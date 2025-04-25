@@ -3,3 +3,34 @@
 @import "tailwindcss/utilities";
 
 /* This file is for your main application CSS */
+:root {
+  --headerH: 5rem;
+}
+:root[data-theme="blue"] {
+  --accent: 225 100% 60%;
+  --bg: 0 0% 95%;
+  --bgUi: 0 0% 0%;
+  --text: 0 0% 5%;
+  --textUi: 0 0% 95%;
+}  
+:root[data-theme="blue-dark"] {
+  --accent: 225 100% 60%;
+  --bg: 0 0% 7.5%;
+  --bgUi: 0 0% 0%;
+  --text: 0 0% 95%;
+  --textUi: 0 0% 95%;
+}  
+:root[data-theme="green"] {
+  --accent: 90 100% 30%;
+  --bg: 0 0% 95%;
+  --bgUi: 0 0% 0%;
+  --text: 0 0% 5%;
+  --textUi: 0 0% 95%;
+}  
+:root[data-theme="green-dark"] {
+  --accent: 90 100% 30%;
+  --bg: 0 0% 7.5%;
+  --bgUi: 0 0% 0%;
+  --text: 0 0% 95%;
+  --textUi: 0 0% 95%;
+}                   

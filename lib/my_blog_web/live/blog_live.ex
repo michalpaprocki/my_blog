@@ -11,7 +11,7 @@ defmodule MyBlogWeb.BlogLive do
     ~H"""
       <div class="flex gap-2 flex-col p-8">
         <%= for meta <- @metadata do %>
-          <.link navigate={"/blog/#{meta["title"]}"} class="flex text-sm flex-col p-2 hover:-translate-y-1 transition rounded-md gap-2 bg-black/70 hover:bg-sky-700 text-white">
+          <.link navigate={"/blog/#{meta["title"]}"} class="flex text-sm flex-col p-2 hover:-translate-y-1 transition rounded-md gap-2 bg-bg-ui/70 hover:bg-accent text-text-ui">
             <span class="font-bold text-base"><%= meta["title"] %></span>
             <span class="font-semibold"><%= meta["author"] %></span>
             <span><%= meta["published"] %></span>

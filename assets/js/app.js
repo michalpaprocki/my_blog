@@ -22,6 +22,26 @@ import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 let Hooks = {}
+Hooks.HandleTheme = {
+  mounted() {
+    const select = document.getElementById("theme_switcher_select")
+    const html = document.querySelector("html")
+    let theme = localStorage.getItem("theme")
+  
+    if(select !== null) {
+      Array.from(select.options).map(o => {
+        if(o.value === theme){
+          o.setAttribute("selected", true)
+        }
+      })
+       
+      select.addEventListener("input", (e) => {
+        html.setAttribute("data-theme", e.target.value)
+        localStorage.setItem("theme", e.target.value)
+      })
+    }
+  }
+}
 
 Hooks.HandleCopy = {
     mounted() {
@@ -62,14 +82,14 @@ const createAndAddCopyButton = (element) => {
   div.classList.add("relative")
   button.classList.add("right-2")
   button.classList.add("right-2")
-  button.classList.add("text-white")
+  button.classList.add("text-text-ui")
   button.classList.add("top-2")
   button.classList.add("h-8")
   button.classList.add("w-16")
-  button.classList.add("bg-violet-700")
+  button.classList.add("bg-accent/70")
   button.classList.add("rounded-md")
   button.classList.add("font-semibold")
-  button.classList.add("hover:bg-violet-500")
+  button.classList.add("hover:bg-accent")
   button.classList.add("transition")
   button.classList.add("absolute")
   button.title = "Copy bellow code"
