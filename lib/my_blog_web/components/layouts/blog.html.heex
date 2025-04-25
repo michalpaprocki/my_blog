@@ -1,0 +1,8 @@
+<.live_component module={MyBlogWeb.Header.Header} id="header" />
+<.live_component module={MyBlogWeb.Breadcrumbs} id="breadcrumbs_navigation" />
+<main class="px-4 py-20 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-2xl">
+    <.flash_group flash={@flash} />
+    {@inner_content}
+  </div>
+</main>

@@ -5,7 +5,12 @@ defmodule MyBlogWeb.ArticleLive do
   def mount(params, _session, socket) do
     %{"title" => title} = params
     article = Blog.get_article_by_title(title)
-  {:ok, socket|> assign(:article, article)}
+  {:ok, socket|> assign(:article, article), layout: {MyBlogWeb.Layouts, :blog}}
+  end
+
+  def handle_params(_unsigned_params, uri, socket) do
+    MyBlogWeb.Breadcrumbs.update_component("breadcrumbs_navigation", uri)
+    {:noreply, socket}
   end
 
   def render(assigns) do

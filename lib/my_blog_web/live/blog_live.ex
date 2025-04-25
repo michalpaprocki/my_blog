@@ -4,7 +4,12 @@ defmodule MyBlogWeb.BlogLive do
 
   def mount(_params, _session, socket) do
     metadata = Blog.get_articles_metadata()
-    {:ok, socket|> assign(:metadata, metadata)}
+    {:ok, socket|> assign(:metadata, metadata), layout: {MyBlogWeb.Layouts, :blog}}
+  end
+
+  def handle_params(_unsigned_params, uri, socket) do
+    MyBlogWeb.Breadcrumbs.update_component("breadcrumbs_navigation", uri)
+    {:noreply, socket}
   end
 
   def render(assigns) do
