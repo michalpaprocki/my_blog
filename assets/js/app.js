@@ -21,12 +21,23 @@ import "phoenix_html"
 import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
+let Hooks = {}
 
+Hooks.HandleCopy = {
+    mounted() {
+      const pre = document.querySelectorAll("pre")
+      pre.forEach(p => {
+        createAndAddCopyButton(p)
+      })
+    }
+}
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {
+  hooks: Hooks,
   longPollFallbackMs: 2500,
   params: {_csrf_token: csrfToken}
 })
+
 
 // Show progress bar on live navigation and form submits
 topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
@@ -42,3 +53,47 @@ liveSocket.connect()
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
 
+const createAndAddCopyButton = (element) => {
+  const code = element.querySelector("code")
+  const article = document.querySelector("article")
+  const button = document.createElement("button")
+  const div = document.createElement("div")
+  
+  div.classList.add("relative")
+  button.classList.add("right-2")
+  button.classList.add("right-2")
+  button.classList.add("text-white")
+  button.classList.add("top-2")
+  button.classList.add("h-8")
+  button.classList.add("w-16")
+  button.classList.add("bg-violet-700")
+  button.classList.add("rounded-md")
+  button.classList.add("font-semibold")
+  button.classList.add("hover:bg-violet-500")
+  button.classList.add("transition")
+  button.classList.add("absolute")
+  button.title = "Copy bellow code"
+  button.innerHTML = "Copy"
+
+  div.append(button)
+  article.insertBefore(div, element)
+  element.remove()
+  div.append(element)
+  button.addEventListener("click", (event) => copyFunction(event, code))
+}
+const notifyAndCleanUp = (event) => {
+  setTimeout(()=>{
+    event.target.classList.remove("scale-110")
+    event.target.innerHTML = "Copy"
+  }, 1000)
+  event.target.classList.add("scale-110")
+  event.target.innerHTML = "Copied!"
+}
+const copyFunction = (event, code) => {
+  if("clipboard" in navigator){
+      navigator.clipboard.writeText(code.innerHTML) 
+      notifyAndCleanUp(event)
+  } else {
+      alert("Sorry, your browser does not support clipboard copy")
+  }
+}
